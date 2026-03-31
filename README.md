@@ -1,79 +1,152 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+## NBE ( National Bank Of Egypt )
 
-# Getting Started
+This project is a **full-featured mobile banking UI** that replicates the look and feel of the National Bank of Egypt app. It demonstrates modern React Native development practices including atomic design, drawer & tab navigation, dark/light theming, OTP verification, biometric authentication UI, and map integration.
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+---
 
-## Step 1: Start the Metro Server
+## Features
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+### Authentication
 
-To start Metro, run the following command from the _root_ of your React Native project:
+- Login with username & password
+- Fingerprint / biometric authentication UI
+- New user signup with Egyptian phone number validation
+- OTP phone verification
+- Set password with validation conditions
+- Success confirmation screen
+
+### Home Dashboard
+
+- Animated balance card
+- Credit cards carousel with card details (holder, number, expiry, CVV)
+- Quick-access services grid
+- Send money to recent contacts
+- Transaction history
+
+### Transfers
+
+- Transfer to another account
+- Account picker dropdowns
+- Amount & reason inputs
+- OTP confirmation for transfers
+- Transfer success modal
+
+### Beneficiaries
+
+- Horizontal and Vertical quick-access list
+- Add new beneficiary (name, phone, image)
+
+### ATM Locator
+
+- Interactive MapView centered on Cairo
+- ATM location markers with details
+
+### Settings (Drawer)
+
+- Dark / Light theme toggle (persisted via Context)
+- Account summary
+- Logout
+
+---
+
+## Demo
+[Insert The Video Here]
+---
+
+## Tech Stack
+
+| Category     | Technology                                                                                          |
+| ------------ | --------------------------------------------------------------------------------------------------- |
+| Framework    | [React Native](https://reactnative.dev/) 0.74.1                                                     |
+| Language     | [TypeScript](https://www.typescriptlang.org/) 5.0                                                   |
+| Navigation   | [React Navigation](https://reactnavigation.org/) — Stack, Bottom Tabs, Drawer                       |
+| Maps         | [react-native-maps](https://github.com/react-native-maps/react-native-maps)                         |
+| Animations   | [React Native Reanimated](https://docs.swmansion.com/react-native-reanimated/) 3.11                 |
+| Icons        | [FontAwesome](https://fontawesome.com/) (Solid & Regular) via `react-native-fontawesome`            |
+| OTP Input    | [react-native-otp-textinput](https://github.com/AkashMishra/react-native-otp-textinput)             |
+| Image Picker | [react-native-image-picker](https://github.com/react-native-image-picker/react-native-image-picker) |
+| SVG          | [react-native-svg](https://github.com/software-mansion/react-native-svg)                            |
+| Linting      | ESLint + Prettier                                                                                   |
+
+---
+
+## Project Structure
+
+The component architecture follows the **Atomic Design** pattern:
+
+```
+NBE/
+├── App.tsx                        # Root — stack navigator, theme context, status bar
+├── index.js                       # Entry point
+├── assets/
+│   ├── fonts/                     # Gemunu Libre (Bold, Regular)
+│   └── images/                    # Logos, backgrounds, card assets, profile images
+├── components/
+│   ├── atoms/                     # Smallest UI elements
+│   │   ├── CustomButton.tsx       #   Reusable button
+│   │   ├── CustomInput.tsx        #   Styled text input
+│   │   ├── CustomIcon.tsx         #   FontAwesome icon wrapper
+│   │   ├── LoginInput.tsx         #   Auth-specific input
+│   │   ├── MobileInput.tsx        #   Phone number input
+│   │   ├── FingerPrint.tsx        #   Biometric auth UI
+│   │   ├── Person.tsx             #   Beneficiary avatar item
+│   │   ├── Service.tsx            #   Service grid item
+│   │   ├── Picker.tsx             #   Dropdown picker
+│   │   ├── SettingsItem.tsx       #   Settings row item
+│   │   ├── TabBarIcon.tsx         #   Bottom tab icon
+│   │   └── ...
+│   ├── molecules/                 # Composed atom groups
+│   │   ├── BalanceCard.tsx        #   Balance display card
+│   │   ├── CreditCard.tsx         #   Credit card component
+│   │   ├── LoginHeader.tsx        #   Auth header
+│   │   ├── LoginFooter.tsx        #   Auth footer
+│   │   ├── ServicesContainer.tsx  #   Services grid
+│   │   ├── PersonContainer.tsx    #   Send money contacts
+│   │   ├── HistoryContainer.tsx   #   Transaction history
+│   │   ├── SettingsContent.tsx    #   Settings menu items
+│   │   └── ...
+│   ├── organisms/                 # Complex UI sections
+│   │   ├── LoginForm.tsx          #   Complete login form
+│   │   ├── TransferModal.tsx      #   Transfer confirmation modal
+│   │   ├── CreditCardsContainer.tsx
+│   │   ├── BeneficiariesHorizontalList.tsx
+│   │   ├── BeneficiariesVerticalList.tsx
+│   │   └── SettingsContainer.tsx
+│   ├── pages/                     # Full screens
+│   │   ├── Main.tsx               #   Bottom tab navigator
+│   │   ├── DrawerMain.tsx         #   Drawer layout
+│   │   ├── Auth/                  #   Login, Signup, Verification, SetPassword, Success
+│   │   ├── Home/                  #   Balance, CreditCards
+│   │   ├── Transfer/              #   TransferForm, OtpTransfer
+│   │   ├── Beneficiaries/         #   Main, History, Add
+│   │   ├── ATMs/                  #   ATM map screen
+│   │   └── Splasher/              #   Splash screen
+│   └── templates/
+│       └── OTPTemplate.tsx        #   Reusable OTP verification layout
+├── android/                       # Android native project
+├── ios/                           # iOS native project (CocoaPods)
+└── __tests__/                     # Jest test files
+```
+
+---
+
+## Getting Started
 
 ```bash
-# using npm
+# 1. Clone the repository
+git clone https://github.com/<your-username>/NBE.git
+cd NBE
+
+# 2. Install dependencies
+npm install
+
+# 3. Install iOS pods (macOS only)
+cd ios && pod install && cd ..
+
+# 4. Start Metro bundler
 npm start
 
-# OR using Yarn
-yarn start
+# 5. Run on a platform
+npm run ios        # iOS
+npm run android    # Android
 ```
-
-## Step 2: Start your Application
-
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
-
-### For Android
-
-```bash
-# using npm
-npm run android
-
-# OR using Yarn
-yarn android
-```
-
-### For iOS
-
-```bash
-# using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
-```
-
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
-
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
-
-## Step 3: Modifying your App
-
-Now that you have successfully run the app, let's modify it.
-
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
-
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
