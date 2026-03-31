@@ -16,7 +16,7 @@ export default function LoginForm() {
     const [usename,setusename] = useState('');
     const [password,setpassword] = useState('');
     const [showErr,setShowErr] = useState(false);
-    const [showPass,setShowPass] = useState(true);
+    const [showPass,setShowPass] = useState(false);
 
 
     function clearInputs() {

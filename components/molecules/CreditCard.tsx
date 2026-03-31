@@ -1,22 +1,34 @@
 import React from 'react';
 import Data from '../atoms/Data';
-import { TouchableOpacity, View, ImageBackground, Text, StyleSheet, Image } from 'react-native';
-import { NavigationProp, useNavigation } from '@react-navigation/native';
-import { HomeStackProps } from '../pages/Home/Home';
+import {
+  TouchableOpacity,
+  View,
+  ImageBackground,
+  Text,
+  StyleSheet,
+  Image,
+} from 'react-native';
+import {NavigationProp, useNavigation} from '@react-navigation/native';
+import {HomeStackProps} from '../pages/Home/Home';
 
-export default function CreditCard({ background, money, code, CVV }: any) {
+export default function CreditCard({background, money, code, CVV}: any) {
   const navigation = useNavigation<NavigationProp<HomeStackProps>>();
 
   return (
-    <TouchableOpacity onPress={() => navigation.navigate('Balance')}>
-      <ImageBackground style={styles.cardContainer} source={require('../../assets/images/reccard.png')}>
+    <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.navigate('Balance')}>
+      <ImageBackground
+        style={styles.cardContainer}
+        source={require('../../assets/images/reccard.png')}>
         <View style={styles.absoluteFill}>
           <Image style={styles.overlayImage} source={background} />
         </View>
 
         <View style={styles.topSection}>
           <Text style={styles.moneyText}>{money}</Text>
-          <Image style={styles.visaImage} source={require('../../assets/images/visa.png')} />
+          <Image
+            style={styles.visaImage}
+            source={require('../../assets/images/visa.png')}
+          />
         </View>
 
         <View style={styles.middleSection}>
