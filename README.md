@@ -1,4 +1,4 @@
-## About
+## NBE ( National Bank Of Egypt )
 
 This project is a **full-featured mobile banking UI** that replicates the look and feel of the National Bank of Egypt app. It demonstrates modern React Native development practices including atomic design, drawer & tab navigation, dark/light theming, OTP verification, biometric authentication UI, and map integration.
 
