@@ -49,10 +49,6 @@ This project is a **full-featured mobile banking UI** that replicates the look a
 
 ---
 
-## Demo
-[Insert The Video Here]
----
-
 ## Tech Stack
 
 | Category     | Technology                                                                                          |
